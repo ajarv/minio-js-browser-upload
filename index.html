@@ -11,6 +11,7 @@
      var file = fileObj[0]
      // Retrieve a URL from our server.
      retrieveNewURL(file, url => {
+       console.log(url)
        // Upload the file to the server.
        uploadFile(file, url)
      })

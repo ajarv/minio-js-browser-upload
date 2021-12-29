@@ -1,3 +1,4 @@
+var morgan = require('morgan')
 var Minio = require('minio');
 
 var client = new Minio.Client({
@@ -8,8 +9,11 @@ var client = new Minio.Client({
     secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG'
 })
 
+
+
 // express is a small HTTP server wrapper, but this works with any HTTP server
 const server = require('express')()
+server.use(morgan('combined'))
 
 server.get('/presignedUrl', (req, res) => {
     // Construct a new postPolicy.
@@ -31,5 +35,6 @@ server.get('/presignedUrl', (req, res) => {
 server.get('/', (req, res) => {
     res.sendFile(__dirname + '/index-post.html');
 })
-
-server.listen(8080)
+const port = 9080
+server.listen(port,'0.0.0.0');
+console.log(`Started  listening on 0.0.0.0:${port}`)
